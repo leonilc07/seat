@@ -43,52 +43,7 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Hero Carousel functionality
-let currentSlide = 0;
-const slides = document.querySelectorAll('.hero-slide');
-const indicators = document.querySelectorAll('.indicator');
-const carousel = document.querySelector('.hero-carousel');
-const totalSlides = slides.length;
 
-function showSlide(index) {
-    indicators.forEach(indicator => indicator.classList.remove('active'));
-    
-    currentSlide = (index + totalSlides) % totalSlides;
-    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-    indicators[currentSlide].classList.add('active');
-}
-
-// Arrow navigation
-document.querySelector('.hero-arrow-left').addEventListener('click', () => {
-    showSlide(currentSlide - 1);
-});
-
-document.querySelector('.hero-arrow-right').addEventListener('click', () => {
-    showSlide(currentSlide + 1);
-});
-
-// Indicator navigation
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-        showSlide(index);
-    });
-});
-
-// Auto-play carousel (optional)
-let autoplayInterval = setInterval(() => {
-    showSlide(currentSlide + 1);
-}, 5000);
-
-// Pause autoplay on hover
-document.querySelector('.hero').addEventListener('mouseenter', () => {
-    clearInterval(autoplayInterval);
-});
-
-document.querySelector('.hero').addEventListener('mouseleave', () => {
-    autoplayInterval = setInterval(() => {
-        showSlide(currentSlide + 1);
-    }, 5000);
-});
 
 // Add intersection observer for fade-in animations
 const observerOptions = {
