@@ -106,6 +106,12 @@ body {
     cursor: pointer;
 }
 
+.logosvg{
+	height: 40px;
+    width: auto;
+    cursor: pointer;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
