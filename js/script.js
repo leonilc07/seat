@@ -1,4 +1,3 @@
-// Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -12,7 +11,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background change on scroll
 const navbar = document.querySelector('.navbar');
 const topBar = document.querySelector('.top-bar');
 let lastScroll = 0;
@@ -20,18 +18,14 @@ let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    // Hide/show navbar and top bar based on scroll direction
     if (currentScroll > lastScroll && currentScroll > 100) {
-        // Scrolling down
         navbar.classList.add('nav-hidden');
         topBar.classList.add('nav-hidden');
     } else {
-        // Scrolling up
         navbar.classList.remove('nav-hidden');
         topBar.classList.remove('nav-hidden');
     }
     
-    // Change background on scroll
     if (currentScroll > 100) {
         navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
         navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.15)';
@@ -43,9 +37,6 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-
-
-// Add intersection observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -60,7 +51,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all range cards
 document.querySelectorAll('.range-card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
@@ -68,13 +58,11 @@ document.querySelectorAll('.range-card').forEach(card => {
     observer.observe(card);
 });
 
-// Button click handlers
 document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
     button.addEventListener('click', function(e) {
         if (!this.closest('a')) {
             e.preventDefault();
             
-            // Create ripple effect
             const ripple = document.createElement('span');
             ripple.style.position = 'absolute';
             ripple.style.borderRadius = '50%';
@@ -89,13 +77,11 @@ document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
             
             setTimeout(() => ripple.remove(), 600);
             
-            // Log action (in real implementation, this would handle actual navigation)
             console.log('Button clicked:', this.textContent);
         }
     });
 });
 
-// Add ripple animation
 const style = document.createElement('style');
 style.textContent = `
     @keyframes ripple {
@@ -111,12 +97,10 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Image lazy loading enhancement
 document.querySelectorAll('img').forEach(img => {
     img.loading = 'lazy';
 });
 
-// Add hover effect to range cards
 document.querySelectorAll('.range-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.querySelector('img').style.transform = 'scale(1.05)';
@@ -127,11 +111,9 @@ document.querySelectorAll('.range-card').forEach(card => {
     });
 });
 
-// Console welcome message
 console.log('%cWelcome to SEAT', 'color: #d32027; font-size: 24px; font-weight: bold;');
 console.log('%cEnjoy the Drive!', 'color: #1a1a1a; font-size: 16px;');
 
-// Preload images for better performance
 window.addEventListener('load', () => {
     const images = [
         'new-seat-leon-2020.avif',
@@ -147,18 +129,14 @@ window.addEventListener('load', () => {
     });
 });
 
-// Handle form submissions (if any forms are added later)
 document.addEventListener('submit', function(e) {
     if (e.target.tagName === 'FORM') {
         e.preventDefault();
         console.log('Form submitted');
-        // Handle form data here
     }
 });
 
-// Add keyboard navigation support
 document.addEventListener('keydown', function(e) {
-    // ESC key closes mobile menu
     const navMenu = document.querySelector('.nav-menu');
     if (e.key === 'Escape' && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
@@ -173,7 +151,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Performance monitoring
 if ('performance' in window) {
     window.addEventListener('load', () => {
         const perfData = performance.getEntriesByType('navigation')[0];
@@ -181,7 +158,6 @@ if ('performance' in window) {
     });
 }
 
-// Canvas Logo Drawing
 const canvas = document.getElementById('logoCanvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -191,17 +167,13 @@ if (canvas) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
         
-        // Center and scale the logo
         ctx.translate(canvas.width / 2, canvas.height / 2);
         ctx.scale(3.5, 3.5);
         ctx.translate(-17, -16);
         
-        // Call draw function from seat_logo.js with color override
         if (typeof SVGIcons !== 'undefined' && SVGIcons['seat-s-logo.svg']) {
-            // Store original fillStyle setter
             const originalFillStyleDescriptor = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'fillStyle');
             
-            // Override fillStyle to always use our custom color
             Object.defineProperty(ctx, 'fillStyle', {
                 set: function(value) {
                     originalFillStyleDescriptor.set.call(this, color);
@@ -212,20 +184,16 @@ if (canvas) {
                 configurable: true
             });
             
-            // Draw the logo
             SVGIcons['seat-s-logo.svg'].draw(ctx);
             
-            // Restore original fillStyle property
             delete ctx.fillStyle;
         }
         
         ctx.restore();
     }
     
-    // Initial draw
     drawLogo(currentColor);
     
-    // Color picker event
     const colorPicker = document.getElementById('logoColorPicker');
     if (colorPicker) {
         colorPicker.addEventListener('input', (e) => {
