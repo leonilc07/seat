@@ -13,7 +13,7 @@ Projekt prikazuje preprosto predlogo domače spletne strani znamke SEAT, v kater
 - Minimalen JavaScript za gladko pomikanje po strani
 
 ## Struktura projekta 📁
-1. `index.html` — glavna HTML datoteka
+1. `seat.html` — glavna HTML datoteka
 
 2. `css/style.css` — slogovne datoteke
 
