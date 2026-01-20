@@ -114,6 +114,31 @@ document.querySelectorAll('.range-card').forEach(card => {
 console.log('%cWelcome to SEAT', 'color: #d32027; font-size: 24px; font-weight: bold;');
 console.log('%cEnjoy the Drive!', 'color: #1a1a1a; font-size: 16px;');
 
+// SweetAlert for "Discover more" button
+const discoverBtn = document.querySelector('.btn-outline');
+if (discoverBtn) {
+    discoverBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        Swal.fire({
+            title: 'Credits',
+            html: `
+                <div style="text-align: left; padding: 20px;">
+                    <p><strong>made by:</strong> Leon Ilc</p>
+                    <p><strong>Images:</strong> SEAT Official</p>
+                    <hr style="margin: 15px 0;">
+                    <p style="font-size: 14px; color: #666;">
+                        This is a demo website showcasing SEAT vehicles.
+                    </p>
+                </div>
+            `,
+            confirmButtonText: 'Close',
+            confirmButtonColor: '#d32027',
+            width: '500px'
+        });
+    });
+}
+
 window.addEventListener('load', () => {
     const images = [
         'new-seat-leon-2020.avif',
