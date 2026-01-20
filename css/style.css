@@ -418,47 +418,6 @@ body {
     margin: -15px;
 }
 
-.color-picker-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: flex-start;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.color-picker-container input[type="color"] {
-    width: 35px;
-    height: 35px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 2px;
-    background: none;
-}
-
-.color-picker-container input[type="color"]::-webkit-color-swatch-wrapper {
-    padding: 0;
-    border-radius: 50%;
-}
-
-.color-picker-container input[type="color"]::-webkit-color-swatch {
-    border: none;
-    border-radius: 50%;
-}
-
-.color-picker-container input[type="color"]::-moz-color-swatch {
-    border: none;
-    border-radius: 50%;
-}
-
-.color-picker-container label {
-    font-size: 14px;
-    color: #666;
-    cursor: pointer;
-    font-weight: 600;
-}
-
 .view-more {
     color: var(--secondary-color);
     text-decoration: none;

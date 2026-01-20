@@ -17,7 +17,7 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll > lastScroll && currentScroll > 100) {
         navbar.classList.add('nav-hidden');
         topBar.classList.add('nav-hidden');
@@ -25,7 +25,7 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('nav-hidden');
         topBar.classList.remove('nav-hidden');
     }
-    
+
     if (currentScroll > 100) {
         navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
         navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.15)';
@@ -33,7 +33,7 @@ window.addEventListener('scroll', () => {
         navbar.style.backgroundColor = 'var(--white)';
         navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -59,10 +59,10 @@ document.querySelectorAll('.range-card').forEach(card => {
 });
 
 document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
         if (!this.closest('a')) {
             e.preventDefault();
-            
+
             const ripple = document.createElement('span');
             ripple.style.position = 'absolute';
             ripple.style.borderRadius = '50%';
@@ -70,13 +70,13 @@ document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
             ripple.style.width = '20px';
             ripple.style.height = '20px';
             ripple.style.animation = 'ripple 0.6s ease-out';
-            
+
             this.style.position = 'relative';
             this.style.overflow = 'hidden';
             this.appendChild(ripple);
-            
+
             setTimeout(() => ripple.remove(), 600);
-            
+
             console.log('Button clicked:', this.textContent);
         }
     });
@@ -102,11 +102,11 @@ document.querySelectorAll('img').forEach(img => {
 });
 
 document.querySelectorAll('.range-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
+    card.addEventListener('mouseenter', function () {
         this.querySelector('img').style.transform = 'scale(1.05)';
     });
-    
-    card.addEventListener('mouseleave', function() {
+
+    card.addEventListener('mouseleave', function () {
         this.querySelector('img').style.transform = 'scale(1)';
     });
 });
@@ -117,9 +117,9 @@ console.log('%cEnjoy the Drive!', 'color: #1a1a1a; font-size: 16px;');
 // SweetAlert for "Discover more" button
 const discoverBtn = document.querySelector('.btn-outline');
 if (discoverBtn) {
-    discoverBtn.addEventListener('click', function(e) {
+    discoverBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         Swal.fire({
             title: 'Credits',
             html: `
@@ -147,21 +147,21 @@ window.addEventListener('load', () => {
         'seat-ateca-2025.avif',
         'new-seat-leon-sportstourer-2020.avif'
     ];
-    
+
     images.forEach(src => {
         const img = new Image();
         img.src = src;
     });
 });
 
-document.addEventListener('submit', function(e) {
+document.addEventListener('submit', function (e) {
     if (e.target.tagName === 'FORM') {
         e.preventDefault();
         console.log('Form submitted');
     }
 });
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     const navMenu = document.querySelector('.nav-menu');
     if (e.key === 'Escape' && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
@@ -187,43 +187,68 @@ const canvas = document.getElementById('logoCanvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
     let currentColor = '#d32027';
-    
+
     function drawLogo(color) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
-        
+
         ctx.translate(canvas.width / 2, canvas.height / 2);
         ctx.scale(3.5, 3.5);
         ctx.translate(-17, -16);
-        
+
         if (typeof SVGIcons !== 'undefined' && SVGIcons['seat-s-logo.svg']) {
             const originalFillStyleDescriptor = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'fillStyle');
-            
+
             Object.defineProperty(ctx, 'fillStyle', {
-                set: function(value) {
+                set: function (value) {
                     originalFillStyleDescriptor.set.call(this, color);
                 },
-                get: function() {
+                get: function () {
                     return originalFillStyleDescriptor.get.call(this);
                 },
                 configurable: true
             });
-            
+
             SVGIcons['seat-s-logo.svg'].draw(ctx);
-            
+
             delete ctx.fillStyle;
         }
-        
+
         ctx.restore();
     }
-    
+
     drawLogo(currentColor);
-    
-    const colorPicker = document.getElementById('logoColorPicker');
-    if (colorPicker) {
-        colorPicker.addEventListener('input', (e) => {
-            currentColor = e.target.value;
-            drawLogo(currentColor);
+
+
+    // SweetAlert for color change button
+    const colorChangeBtn = document.querySelector('#colorChange');
+    if (colorChangeBtn) {
+        colorChangeBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Change Logo Color',
+                html: `
+                <div style="text-align: left; padding: 20px;">
+                    <p><strong>spremeni barvo:</strong></p>
+                    <input type="color" id="swalColorPicker" value="${currentColor}" style="width: 5%; height: 20px; cursor: pointer;">
+                    <label for="swalColorPicker">Change color</label>
+                </div>
+                `,
+                confirmButtonText: 'Close',
+                confirmButtonColor: '#d32027',
+                width: '500px',
+                didOpen: () => {
+                    const swalColorPicker = document.getElementById('swalColorPicker');
+                    if (swalColorPicker) {
+                        swalColorPicker.addEventListener('input', (e) => {
+                            currentColor = e.target.value;
+                            drawLogo(currentColor);
+                        });
+                    }
+                }
+            });
         });
     }
+
 }
