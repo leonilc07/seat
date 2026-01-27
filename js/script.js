@@ -114,7 +114,6 @@ document.querySelectorAll('.range-card').forEach(card => {
 console.log('%cWelcome to SEAT', 'color: #d32027; font-size: 24px; font-weight: bold;');
 console.log('%cEnjoy the Drive!', 'color: #1a1a1a; font-size: 16px;');
 
-// SweetAlert for "Discover more" button
 const discoverBtn = document.querySelector('.btn-outline');
 if (discoverBtn) {
     discoverBtn.addEventListener('click', function (e) {
@@ -220,7 +219,6 @@ if (canvas) {
     drawLogo(currentColor);
 
 
-    // SweetAlert for color change button
     const colorChangeBtn = document.querySelector('#colorChange');
     if (colorChangeBtn) {
         colorChangeBtn.addEventListener('click', function (e) {
